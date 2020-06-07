@@ -15,7 +15,7 @@ function split(parsed) {
       d = d.trim();
       return i && d ? "M" + d : d;
     })
-    .filter(d => d);
+    .filter((d) => d);
 }
 
 export function toPathString(ring) {
@@ -87,22 +87,10 @@ function approximateRing(parsed, maxSegmentLength) {
 
   return {
     ring,
-    skipBisect: true
+    skipBisect: true,
   };
 }
 
 function measure(d) {
-  // Use native browser measurement if running in browser
-  if (typeof window !== "undefined" && window && window.document) {
-    try {
-      let path = window.document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path"
-      );
-      path.setAttributeNS(null, "d", d);
-      return path;
-    } catch (e) {}
-  }
-  // Fall back to svg-path-properties
   return svgPathProperties(d);
 }
